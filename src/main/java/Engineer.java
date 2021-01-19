@@ -10,4 +10,16 @@ public class Engineer {
         this.lastname = lastname;
         this.email = email;
     }
+
+    public String getSecondName(){
+        return lastname;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstname;
+    }
 }
