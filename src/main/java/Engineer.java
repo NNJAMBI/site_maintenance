@@ -16,6 +16,16 @@ public class Engineer {
         this.email = email;
     }
 
+    public static Engineer find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM engineer where id=:id";
+            Engineer engineer= con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Engineer.class);
+            return engineer;
+        }
+    }
+
     public String getSecondName(){
         return lastname;
     }
@@ -61,5 +71,16 @@ public class Engineer {
 
     public int getId() {
         return id;
+    }
+
+    public void update(String firstname,String lastname, String email) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "UPDATE engineer SET firstname = :firstname,lastname = :lastname,email = :email";
+            con.createQuery(sql)
+                    .addParameter("firstname",firstname )
+                    .addParameter("lastname",lastname )
+                    .addParameter("email",email )
+                    .executeUpdate();
+        }
     }
 }

@@ -68,5 +68,29 @@ public class EngineerTest {
         Engineer savedEngineer = Engineer.all().get(0);
         assertEquals(firstEngineer.getId(), savedEngineer.getId());
     }
+
+    @Test
+    public void getId_engineerInstantiateWithAnID() {
+        Engineer firstEngineer = new Engineer("Nancy", "Karanja","[email protected]");
+        firstEngineer.save();
+        assertTrue(firstEngineer.getId() > 0);
+    }
+
+    @Test
+    public void find_returnsEngineerWithSameId_secondEngineer() {
+        Engineer firstEngineer = new Engineer("Nancy", "Karanja","[email protected]");
+        firstEngineer.save();
+        Engineer secondEngineer = new Engineer("Brian", "Masai","[email protected]");
+        secondEngineer.save();
+        assertEquals(Engineer.find(secondEngineer.getId()), secondEngineer);
+    }
+
+    @Test
+    public void update_updatesEngineer_true() {
+        Engineer firstEngineer = new Engineer("Nancy", "Karanja","[email protected]");
+        firstEngineer.save();
+        firstEngineer.update("Brian", "Masai","[email protected]");
+        assertEquals("Brian", Engineer.find(firstEngineer.getId()).getFirstName());
+    }
 }
 
