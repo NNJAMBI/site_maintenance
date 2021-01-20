@@ -1,9 +1,13 @@
+import org.sql2o.Connection;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Engineer {
-    private String firstname,lastname,email;
+    private String firstname;
+    private String lastname;
+    private String email;
     private int id;
 
     public Engineer(String firstname, String lastname, String email) {
@@ -34,5 +38,28 @@ public class Engineer {
                     this.getSecondName().equals(newEngineer.getSecondName()) &&
                     this.getEmail().equals(newEngineer.getEmail());
         }
+    }
+
+    public void save() {
+        try(Connection con = DB.sql2o.open())  {
+            String sql = "INSERT INTO engineer (firstname, lastname, email) VALUES (:firstname, :lastname, :email)";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("firstname", this.firstname)
+                    .addParameter("lastname",this.lastname)
+                    .addParameter("email",this.email)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
+
+    public static List<Engineer> all() {
+        String sql = "SELECT * FROM engineer";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Engineer.class);
+        }
+    }
+
+    public int getId() {
+        return id;
     }
 }

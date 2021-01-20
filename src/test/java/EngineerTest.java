@@ -49,5 +49,24 @@ public class EngineerTest {
         testEngineer.save();
         assertTrue(Engineer.all().get(0).equals(testEngineer));
     }
+
+    @Test
+    public void all_returnsAllInstancesOfEngineer_true() {
+        Engineer firstEngineer = new Engineer("Nancy", "Karanja","[email protected]");
+        firstEngineer.save();
+        Engineer secondEngineer = new Engineer("Nancy", "Karanja","[email protected]");
+        secondEngineer.save();
+
+        assertEquals(true, Engineer.all().get(0).equals(firstEngineer));
+        assertEquals(true, Engineer.all().get(1).equals(secondEngineer));
+    }
+
+    @Test
+    public void save_assignsIdToObject() {
+        Engineer firstEngineer = new Engineer("Nancy", "Karanja","[email protected]");
+        firstEngineer.save();
+        Engineer savedEngineer = Engineer.all().get(0);
+        assertEquals(firstEngineer.getId(), savedEngineer.getId());
+    }
 }
 
