@@ -53,5 +53,12 @@ public class SiteTest {
         Site secondSite = new Site("HQ3 DR", 1);
         assertTrue(firstSite.equals(secondSite));
     }
+
+    @Test
+    public void save_returnsTrueIfSite_namesAreTheSame() {
+        Site mySite = new Site("HQ3 DR", 1);
+        mySite.save();
+        assertTrue(Site.all().get(0).equals(mySite));
+    }
 }
 
