@@ -23,6 +23,35 @@ public class SiteTest {
         assertEquals("Thika Servers", mySite.getSiteName());
     }
 
+    @Test
+    public void getCreatedAt_instantiatesWithCurrentTime_Today() {
+        Site mySite = new Site("QOA DR", 1);
+        assertEquals(LocalDateTime.now().getDayOfWeek(), mySite.getCreatedAt().getDayOfWeek());
+    }
 
+    @Test
+    public void all_returnsAllInstancesOfSite_True() {
+        Site firstSite = new Site("HQ DR", 1);
+        firstSite.save();
+        Site secondSite = new Site("Garissa DR", 1);
+        secondSite.save();
+        assertEquals(true, Site.all().get(0).equals(firstSite));
+        assertEquals(true, Site.all().get(1).equals(secondSite));
+
+    }
+
+    @Test
+    public void getId_sitesInstantiatesWithAnId_1() {
+        Site mySite = new Site("MSR Power Station", 1);
+        mySite.save();
+        assertEquals(1, mySite.getId()>0 );
+    }
+
+    @Test
+    public void equals_returnsTrueIfSite_nameAreTheSame() {
+        Site firstSite = new Site("HQ3 DR", 1);
+        Site secondSite = new Site("HQ3 DR", 1);
+        assertTrue(firstSite.equals(secondSite));
+    }
 }
 
