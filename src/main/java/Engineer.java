@@ -5,23 +5,23 @@ import java.util.List;
 import java.util.Objects;
 
 public class Engineer {
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
     private int id;
 
     public Engineer(String firstname, String lastname, String email) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.email = email;
     }
 
 
     public String getFirstName() {
-        return firstname;
+        return firstName;
     }
     public String getSecondName() {
-        return lastname;
+        return lastName;
     }
 
     public String getEmail() {
@@ -41,12 +41,12 @@ public class Engineer {
     }
 
 
-    public void save() {
+    public  void save() {
         try (Connection con = DB.sql2o.open()) {
             String sql = "INSERT INTO engineer (firstname, lastname, email) VALUES (:firstname, :lastname, :email)";
             this.id = (int) con.createQuery(sql, true)
-                    .addParameter("firstname", this.firstname)
-                    .addParameter("lastname", this.lastname)
+                    .addParameter("firstname", this.firstName)
+                    .addParameter("lastname", this.lastName)
                     .addParameter("email", this.email)
                     .executeUpdate()
                     .getKey();

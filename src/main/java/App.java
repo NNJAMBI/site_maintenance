@@ -23,7 +23,7 @@ public class App {
             port = 4567;
         }
         port(port);
-
+//get all sites and engineers
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> allEngineers = Engineer.all();
@@ -32,5 +32,37 @@ public class App {
             model.put("Site", site );
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
+
+
+        get("/Engineer", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("Engineer",Engineer.all());
+            model.put("template", "templates/Engineer.hbs");
+            return new HandlebarsTemplateEngine().render(
+                    new ModelAndView(model, layout)
+            );
+        });
+        get("/Engineer/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("template", "templates/add-engineer-form.hbs");
+            return new HandlebarsTemplateEngine().render(
+                    new ModelAndView(model, layout)
+            );
+        });
+
+        post("/Engineer", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            String firstName = req.queryParams("firstName");
+            String secondName = req.queryParams("secondName");
+            String Email = req.queryParams("Email");
+            Engineer engineer = new Engineer(firstName,secondName,Email);
+            engineer.save();
+            model.put("template", "templates/Engineer-added-success-page.hbs");
+            return new HandlebarsTemplateEngine().render(
+                    new ModelAndView(model, layout)
+            );
+        });
     }
+
 }
+

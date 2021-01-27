@@ -1,0 +1,34 @@
+{{#partial "content"}}
+
+<body class="add-site">
+
+<div class="card container site-form">
+    <h2 class="add-engineer-title"> Add Engineer</h2>
+    <form action="/Engineer" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Nancy">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="secondName">Second Name</label>
+                <input type="text" class="form-control" name="secondName" id="secondName" placeholder="Karanja">
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for="Email">Email</label>
+                <input type="text" class="form-control" name="Email" id="Email" placeholder="xx@xx.xxx">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+
+</body>
+
+
+{{/partial}}
+{{>layout.hbs}}
