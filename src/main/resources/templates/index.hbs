@@ -1,0 +1,15 @@
+{{#partial "content"}}
+
+    <h1>List of all Sites</h1>
+
+    {{# if site}}
+        {{#each site }}
+            <p><a href="/Engineer/{{engineerId}}/site/{{id}}">{{site_name}}</a> </p>
+        {{/each}}
+    {{else}}
+        <p>No Site added</p>
+    {{/if}}
+
+{{/partial}}
+
+{{> layout.hbs}}

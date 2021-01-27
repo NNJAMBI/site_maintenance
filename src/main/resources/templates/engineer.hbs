@@ -1,0 +1,34 @@
+{{#partial "content"}}
+
+<div class="card mb-3 text-center" style="color: black">
+    <div class="row no-gutters">
+        <div class="col-md-4" style="background: #DCDCDC; padding:3rem">
+            <i class="far fa-user fa-7x"></i>
+            <h2>{{Engineer.getFirstName }}{{ Engineer.getSecondName }}</h2>
+            <p><i class="fas fa-envelope-open"></i> Email: {{Engineer.getEmail }} </p>
+            <form action="/Engineer/{{Engineer.getId }}/delete" method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="/Engineer/{{ Engineer.getId}}/edit" class="btn btn-outline-success">Edit</a>
+            </form>
+        </div>
+        <div class="col-md-8" style="padding:3rem">
+            <div class="card-body">
+                <h2 class="card-title">Sites</h2>
+                <ul class="list-group list-group-flush">
+
+                    {{# if site}}
+                        {{#each site }}
+                            <p><a href="/Engineer/{{engineerId}}/site/{{id}}">{{site_name}}</a> </p>
+                        {{/each}}
+                    {{else}}
+                        <p>No Site added</p>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}
