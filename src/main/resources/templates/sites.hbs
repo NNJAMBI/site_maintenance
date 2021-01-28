@@ -1,29 +1,46 @@
 {{#partial "content"}}
 
-<div class="engineer-content container">
-    <h1 class="engineer-heading"> SITES</h1>
-    <table class="table table-dark">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Site Name</th>
-            <th scope="col">Engineer Id</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each Site }}
-        <tr>
-            <td>{{Site.getSite_name}}</td>
-            <td>{{Site.getEngineerId}}</td>
+    <div class="card" style="width:400px">
+        <h1> style="font-family: 'Tangerine', serif;"Site list!</h1>
+        {{#if Site}}
+        <ul>
+            {{#each Site}}
+            <li> <a href="/Sites/{{Site.getId}}">{{Site.getSite_name}}</a> </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>No Sites!</p>
+        {{/if}}
 
-            <td>
-                <a href="/Site/$Site.getId()" class="btn btn-primary btn-sm">View</a>
-            </td>
-        </tr>
-        {{/each}}
-        </tbody>
-    </table>
-    <a class="btn btn-outline-light nav-item" href="/Site/new"> NEW SITE </a>
-</div>
+        <a href="/Sites/new">Add New Site</a>
+    </div>
+
+
+
+<!--<div class="engineer-content container">-->
+<!--    <h1 class="engineer-heading"> SITES</h1>-->
+<!--    <table class="table table-dark">-->
+<!--        <thead class="thead-dark">-->
+<!--        <tr>-->
+<!--            <th scope="col">Site Name</th>-->
+<!--            <th scope="col">Engineer Id</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        {{#each Site }}-->
+<!--        <tr>-->
+<!--            <td>{{Site.getSite_name}}</td>-->
+<!--            <td>{{Site.getEngineerId}}</td>-->
+
+<!--            <td>-->
+<!--                <a href="/Site/$Site.getId()" class="btn btn-primary btn-sm">View</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        {{/each}}-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <a class="btn btn-outline-light nav-item" href="/Site/new"> NEW SITE </a>-->
+<!--</div>-->
 
 {{/partial}}
 {{>layout.hbs}}

@@ -1,0 +1,29 @@
+{{#partial "content"}}
+
+<div class="engineer-content container">
+    <h1 class="engineer-heading"> SITES</h1>
+    <table class="table table-dark">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Site Name</th>
+            <th scope="col">Engineer Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each Site }}
+        <tr>
+            <td>{{Site.getSite_name}}</td>
+            <td>{{Site.getEngineerId}}</td>
+
+            <td>
+                <a href="/Site/$Site.getId()" class="btn btn-primary btn-sm">View</a>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    <a class="btn btn-outline-light nav-item" href="/Site/new"> NEW SITE </a>
+</div>
+
+{{/partial}}
+{{>layout.hbs}}

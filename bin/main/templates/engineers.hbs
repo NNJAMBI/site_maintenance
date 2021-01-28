@@ -12,23 +12,20 @@
         </tr>
         </thead>
         <tbody>
-        {{#each Engineer}}
+        {{#foreach }}({{Engineer }}in {{Engineer}})
         <tr>
             <th scope="row">$Engineer.getId()</th>
             <td>{{Engineer.getFirstName}}</td>
             <td>{{Engineer.getSecondName}}</td>
             <td>{{Engineer.getEmail}}</td>
             <td>
-                <a  class="btn btn-primary btn-sm" href="Engineer/{{engineerId}}">View</a>
+                <a  class="btn btn-primary btn-sm" href="Engineer/{{Engineer.getId}}">View</a>
             </td>
         </tr>
-        {{/each}}
+        {{/foreach}}
         </tbody>
     </table>
-<!--    <a class="btn btn-outline-light nav-item" href="/Engineer/new"> NEW ENGINEERS </a>-->
-
-    <a href="/Engineers/Engineer.getId()/Sites/new">Add a new Site</a>
-    <a href="/Engineers">All Engineers</a>
+    <a class="btn btn-outline-light nav-item" href="/Engineer/new"> NEW ENGINEERS </a>
 </div>
 
 {{/partial}}

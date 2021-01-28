@@ -16,6 +16,14 @@ public class Engineer {
         this.email = email;
     }
 
+    public  List<Site> getSites() {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM sites where engineerId=:id";
+            return con.createQuery(sql)
+                    .addParameter("id", this.id)
+                    .executeAndFetch(Site.class);
+        }
+    }
 
     public String getFirstName() {
         return firstName;
@@ -76,16 +84,6 @@ public class Engineer {
                     this.getEmail().equals(newEngineer.getEmail());
         }
     }
-
-    public List<Site> getSites() {
-        try (Connection con = DB.sql2o.open()) {
-            String sql = "SELECT * FROM sites where engineerId=:id";
-            return con.createQuery(sql)
-                    .addParameter("id", this.id)
-                    .executeAndFetch(Site.class);
-        }
-    }
-
 
     public void update(String firstname, String lastname, String email) {
         try (Connection con = DB.sql2o.open()) {
