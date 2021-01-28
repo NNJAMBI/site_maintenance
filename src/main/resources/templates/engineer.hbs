@@ -16,12 +16,12 @@
                 <h2 class="card-title">Sites</h2>
                 <ul class="list-group list-group-flush">
 
-                    {{# if site}}
-                        {{#each site }}
+                    {{# if Engineer}}
+                        {{#each Engineer }}
                             <p><a href="/Engineer/{{engineerId}}/site/{{id}}">{{site_name}}</a> </p>
                         {{/each}}
                     {{else}}
-                        <p>No Site added</p>
+                        <p>No Engineer added</p>
                     {{/if}}
                 </ul>
             </div>

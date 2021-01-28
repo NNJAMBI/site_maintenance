@@ -34,22 +34,22 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-        get("/Engineer", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            model.put("Engineer",Engineer.all());
-            model.put("template", "templates/Engineer.hbs");
-            return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, layout)
-            );
-        });
+      get("/Engineer", (req, res) -> {
+        Map<String, Object> model = new HashMap<>();
+          List<Engineer> allEngineers = Engineer.all();
+            model.put("Engineer", allEngineers);
+            return new ModelAndView(model, "engineer.hbs");
+        }, new HandlebarsTemplateEngine());
+
+//form to add engineer
         get("/Engineer/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("template", "templates/add-engineer-form.hbs");
-            return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, layout)
-            );
-        });
+            List<Engineer> allEngineers = Engineer.all();
+            model.put("Engineer", allEngineers);
+            return new ModelAndView(model, "add-engineer-form.hbs");
+        }, new HandlebarsTemplateEngine());
 
+//process form to create new engineer
         post("/Engineer", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             String firstName = req.queryParams("firstName");
@@ -57,11 +57,49 @@ public class App {
             String Email = req.queryParams("Email");
             Engineer engineer = new Engineer(firstName,secondName,Email);
             engineer.save();
-            model.put("template", "templates/Engineer-added-success-page.hbs");
-            return new HandlebarsTemplateEngine().render(
-                    new ModelAndView(model, layout)
-            );
-        });
+            res.redirect("engineer-added-success-page.hbs");
+            return new ModelAndView(model, layout);
+        }, new HandlebarsTemplateEngine());
+
+
+        get("/Engineer/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Engineer engineer = Engineer.find(Integer.parseInt(req.params(":id")));
+            model.put("Engineer", engineer);
+            return new ModelAndView(model, layout);
+        }, new HandlebarsTemplateEngine());
+
+
+        post("/Engineer/:id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Engineer engineer = Engineer.find(Integer.parseInt(req.params(":id")));
+            engineer.delete();
+            res.redirect("Engineer-delete-success-page.hbs");
+            return new ModelAndView(model, layout);
+        }, new HandlebarsTemplateEngine());
+
+
+        get("/Engineer/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("editEngineer", true);
+            Engineer engineer = Engineer.find(Integer.parseInt(req.params("id")));
+            model.put("Engineer", engineer);
+            model.put("Engineer", Engineer.all());
+            return new ModelAndView(model, "Engineer-edit.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        post("/Engineer/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            String firstName = req.queryParams("firstName");
+            String secondName = req.queryParams("secondName");
+            String email = req.queryParams("Email");
+            Engineer engineer = Engineer.find(Integer.parseInt(req.params(":id")));
+            engineer.update(firstName,secondName,email);
+            String url = String.format("/Engineer/%d",engineer.getId());
+            res.redirect(url);
+            return new ModelAndView(model, layout);
+        }, new HandlebarsTemplateEngine());
     }
 
 }

@@ -1,0 +1,25 @@
+{{#partial "content"}}
+
+<div class="card container site-form">
+    <h2> Edit Site</h2>
+    <form method="post" action="/Site/{{Site.getId}}/edit">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="site_name">Site Name</label>
+                <input type="text" class="form-control" id="site_name"  name="site_name" placeholder="THIKA SERVERS" value="{{Site.getSite_name}}" required>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="engineerId">Engineer</label>
+                <select id="engineerId" name="engineerId" class="form-control">
+    {{#foreach Engineer}}
+                    <option value="{{Engineer.getId}}">{{Engineer.getFirstName}} {{Engineer.getSecondName}}</option>
+    {{/foreach}}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+
+{{/partial}}
+{{>layout.hbs}}

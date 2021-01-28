@@ -1,0 +1,39 @@
+{{#partial "content"}}
+
+<div class="card" style="width:400px">
+    <h1> style="font-family: 'Tangerine', serif;"Sites!</h1>
+    {{#if Site}}
+            <ul>
+                {{#foreach site }}
+                <li> <a href="/Sites/{{Site.getId}}">{{Site.getSite_name}}</a> </li>
+                {{/foreach}}
+            </ul>
+            {{else}}
+            <p>No Sites!</p>
+    {{/if}}
+            <a href="/Site/new">Add New Site</a>
+        </div>
+
+<div class="card container site-form">
+    <h2> Add Site</h2>
+    <form method="post" action="/Site">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="site_name">Site Name</label>
+                <input type="text" class="form-control" id="site_name"  name="site_name" placeholder="Thika Servers">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="engineerId">Engineer</label>
+                <select id="engineerId" name="engineerId" class="form-control">
+                    {{#foreach Engineer}}
+                    <option value="$Engineer.getId()">{{Engineer.getFirstName}} {{Engineer.getSecondName}}</option>
+                    {{/foreach}}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+
+{{/partial}}
+{{>layout.hbs}}

@@ -1,0 +1,33 @@
+{{#partial "content"}}
+
+<div class="Engineer-content container">
+    <h1 class="Engineer-heading"> ENGINEERS</h1>
+    <table class="table table-dark">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#foreach }}({{Engineer }}in {{Engineer}})
+        <tr>
+            <th scope="row">$Engineer.getId()</th>
+            <td>{{Engineer.getFirstName}}</td>
+            <td>{{Engineer.getSecondName}}</td>
+            <td>{{Engineer.getEmail}}</td>
+            <td>
+                <a  class="btn btn-primary btn-sm" href="Engineer/{{Engineer.getId}}">View</a>
+            </td>
+        </tr>
+        {{/foreach}}
+        </tbody>
+    </table>
+    <a class="btn btn-outline-light nav-item" href="/Engineer/new"> NEW ENGINEERS </a>
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}

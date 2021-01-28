@@ -8,7 +8,6 @@ public class Site{
     private int id;
     private String site_name;
     private int engineerId;
-    private boolean completed;
     private LocalDateTime createdAt;
 
     @Override
@@ -17,9 +16,9 @@ public class Site{
             return false;
         }else{
             Site newSite = (Site) otherSite;
-            return this.getsite_name().equals(newSite.getsite_name()) &&
+            return this.getSiteName().equals(newSite.getSite_name()) &&
                     this.getId() == newSite.getId() &&
-                    this.getengineerId() == newSite.getengineerId();
+                    this.getEngineerId() == newSite.getEngineerId();
         }
     }
 
@@ -55,21 +54,16 @@ public class Site{
 
     public Site(String site_name, int engineerId) {
         this.site_name = site_name;
-        completed = false;
         createdAt = LocalDateTime.now();
         this.engineerId = engineerId;
     }
 
-    public int getengineerId(){
+    public int getEngineerId(){
         return engineerId;
     }
 
-    public String getsite_name() {
+    public String getSite_name() {
         return site_name;
-    }
-
-    public boolean isCompleted() {
-        return completed;
     }
 
     public LocalDateTime getCreatedAt() {

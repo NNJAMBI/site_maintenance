@@ -1,0 +1,28 @@
+{{#partial "content"}}
+
+<div class="card mb-3 text-center" style="color: black">
+    <div class="row no-gutters">
+        <div class="col-md-4" style="background: #DCDCDC; padding:3rem">
+            <i class="far fa-user fa-7x"></i>
+            <h2>{{ Site.getSite_name }}{{Site.getEngineerId}}</h2>
+
+            <form action="/Site/{{Site.getId}}/delete" method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="/Site/$Site.getId()/edit" class="btn btn-outline-success">Edit</a>
+            </form>
+        </div>
+
+        <div class="col-md-8" style="padding:3rem">
+            <div class="card-body">
+                <h2 class="card-title">Details</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fas fa-envelope-open"></i> Site Name: {{Site.getSite_name}}</li>
+                    <li class="list-group-item"><i class="fas fa-female"></i> Engineer ID:{{Site.getEngineerId}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{>layout.hbs}}
