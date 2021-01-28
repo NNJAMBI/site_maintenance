@@ -44,14 +44,14 @@
            aria-expanded="false">
             All Engineers <span class="caret"></span></a>
         <ul class="dropdown-menu">
-            {{#if Engineer}}
+           {{#if Engineer}}
                 {{#each Engineer}}
                     <li><a href="/Engineer/{{id}}">{{firstname}}{{lastname}}</a></li>
                 {{/each}}
-                <li><a href="/engineer/new">Add an engineer</a></li>
+               <li><a href="/engineer/new">Add an engineer</a></li>
             {{else}}
                 <li><a href="/Engineer/new">Add an Engineer</a></li>
-            {{/if}}
+           {{/if}}
         </ul>
             <div class="container">
                 <div class="col-md-12">
@@ -110,7 +110,7 @@
         <!--                {{#each Engineer}}-->
 <!--                    <li><a href="/Engineer/{{id}}">{{firstname}}{{lastname}}</a></li>-->
         <!--                {{/each}}-->
-<!--                &lt;!&ndash; <li><a href="/engineer/new">Add an engineer</a></li>&ndash;&gt;-->
+<!--                <li><a href="/engineer/new">Add an engineer</a></li>;-->
         <!--            {{else}}-->
 <!--                <li><a href="/Engineer/new">Add an Engineer</a> </li>-->
         <!--            {{/if}}-->
@@ -118,7 +118,7 @@
 <!--    </li>-->
 <!--</ul>-->
 <!--<div class="container">-->
-<!--    &lt;!&ndash;begin main template&ndash;&gt;-->
+<!--    &lt;!&ndash;begin main template&;-->
 <!--    <div class="page-header">-->
 <!--        <h1>Welcome to site maintenance. </h1>-->
 <!--        <p>-->

@@ -1,7 +1,6 @@
 {{#partial "content"}}
 
 <div class="card" style="width:400px">
-    <h1> style="font-family: 'Tangerine', serif;"Sites!</h1>
     {{#if Site}}
             <ul>
                 {{#each site }}
@@ -10,8 +9,9 @@
             </ul>
             {{else}}
             <p>No Sites!</p>
+        <a href="/Site/new">Add New Site</a>
     {{/if}}
-            <a href="/Site/new">Add New Site</a>
+
         </div>
 
 <div class="card container site-form">

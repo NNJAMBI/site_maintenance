@@ -45,7 +45,7 @@ public class App {
         get("/Engineer/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> allEngineers = Engineer.all();
-            model.put("Engineer", allEngineers);
+           model.put("Engineer", allEngineers);
             return new ModelAndView(model, "add-engineer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -108,6 +108,16 @@ public class App {
             model.put("Site", allSites);
             return new ModelAndView(model, "sites.hbs");
         }, new HandlebarsTemplateEngine());
+
+        get("/Site/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Engineer> allEngineers = Engineer.all();
+            model.put("Engineer", allEngineers);
+            List<Site> allSites = Site.all();
+            model.put("Site", allSites);
+            return new ModelAndView(model, "add-site-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
     }
 
 }
