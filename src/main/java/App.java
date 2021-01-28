@@ -29,16 +29,16 @@ public class App {
             List<Engineer> allEngineers = Engineer.all();
             model.put("Engineer", allEngineers);
             List<Site> site = Site.all();
-            model.put("Site", site );
+            model.put("Site", site);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
 
-      get("/Engineer", (req, res) -> {
-        Map<String, Object> model = new HashMap<>();
-          List<Engineer> allEngineers = Engineer.all();
+        get("/Engineer", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Engineer> allEngineers = Engineer.all();
             model.put("Engineer", allEngineers);
-            return new ModelAndView(model, "engineer.hbs");
+            return new ModelAndView(model, "engineers.hbs");
         }, new HandlebarsTemplateEngine());
 
 //form to add engineer
@@ -55,7 +55,7 @@ public class App {
             String firstName = req.queryParams("firstName");
             String secondName = req.queryParams("secondName");
             String Email = req.queryParams("Email");
-            Engineer engineer = new Engineer(firstName,secondName,Email);
+            Engineer engineer = new Engineer(firstName, secondName, Email);
             engineer.save();
             res.redirect("engineer-added-success-page.hbs");
             return new ModelAndView(model, layout);
@@ -95,10 +95,18 @@ public class App {
             String secondName = req.queryParams("secondName");
             String email = req.queryParams("Email");
             Engineer engineer = Engineer.find(Integer.parseInt(req.params(":id")));
-            engineer.update(firstName,secondName,email);
-            String url = String.format("/Engineer/%d",engineer.getId());
+            engineer.update(firstName, secondName, email);
+            String url = String.format("/Engineer/%d", engineer.getId());
             res.redirect(url);
             return new ModelAndView(model, layout);
+        }, new HandlebarsTemplateEngine());
+
+        //get all sites
+        get("/Site", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Site> allSites = Site.all();
+            model.put("Site", allSites);
+            return new ModelAndView(model, "sites.hbs");
         }, new HandlebarsTemplateEngine());
     }
 

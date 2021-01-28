@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-        {{#foreach Site }}
+        {{#each Site }}
         <tr>
             <td>{{Site.getSite_name}}</td>
             <td>{{Site.getEngineerId}}</td>
@@ -19,7 +19,7 @@
                 <a href="/Site/$Site.getId()" class="btn btn-primary btn-sm">View</a>
             </td>
         </tr>
-        {{/foreach}}
+        {{/each}}
         </tbody>
     </table>
     <a class="btn btn-outline-light nav-item" href="/Site/new"> NEW SITE </a>

@@ -11,9 +11,9 @@
             <div class="form-group col-md-2">
                 <label for="engineerId">Engineer</label>
                 <select id="engineerId" name="engineerId" class="form-control">
-    {{#foreach Engineer}}
+    {{#each Engineer}}
                     <option value="{{Engineer.getId}}">{{Engineer.getFirstName}} {{Engineer.getSecondName}}</option>
-    {{/foreach}}
+    {{/each}}
                 </select>
             </div>
         </div>
