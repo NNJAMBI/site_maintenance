@@ -5,39 +5,38 @@ import org.sql2o.Connection;
 
 
 public class Site{
-    private static String engineerId;
     private int id;
     private String site_name;
     private String  county;
+    private int engineerId;
     private Timestamp createdAt;
 
-
-    public Site(String site_name, String county, String engineerId) {
+    public Site(int id, String site_name, String county, int engineerId, Timestamp createdAt) {
+        this.id = id;
         this.site_name = site_name;
         this.county = county;
         this.engineerId = engineerId;
+        this.createdAt = createdAt;
     }
 
-
-    public int getId(){
-        return this.id;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public static String getEngineerId() {
-        return  engineerId;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getSite_name() {
-        return site_name;
+    public int getId() {
+        return id;
     }
-    
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public String getSite_name() {
+        return site_name;
     }
 
     public void setSite_name(String site_name) {
@@ -45,17 +44,21 @@ public class Site{
     }
 
     public void setCounty(String county) {
-        this.site_name = site_name;
+        this.county = county;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-       this.createdAt = createdAt;
+    public int getEngineerId() {
+        return engineerId;
+    }
+
+    public void setEngineerId(int engineerId) {
+        this.engineerId = engineerId;
     }
 
     public void save(){
-        String sql = "INSERT INTO sites (engineerId, site_name, county, createdAt) VALUES (:engineerId, :site_name, :county, :createdAt)";
+        String sql = "INSERT INTO sites (site_name, county, engineerId) VALUES (:site_name, :county, :engineerId)";
         try(Connection con = DB.sql2o.open()){
-            this.engineerId = (String) con.createQuery(sql, true)
+             con.createQuery(sql, true)
                     .addParameter("site_name", this.site_name)
                     .addParameter("county", this.county)
                     .executeUpdate()
@@ -67,6 +70,15 @@ public class Site{
         String sql = "SELECT * FROM sites ORDER BY id DESC";
         try(Connection con = DB.sql2o.open()){
             return con.createQuery(sql).executeAndFetch(Site.class);
+        }
+    }
+
+    public static List<Site> findByEngineer(int engineerId) {
+        String sql = "SELECT * FROM sites WHERE engineerId=:engineerId ORDER BY id DESC";
+        try(Connection con = DB.sql2o.open()){
+            return con.createQuery(sql)
+                    .addParameter("engineerId", engineerId)
+                    .executeAndFetch(Site.class);
         }
     }
 

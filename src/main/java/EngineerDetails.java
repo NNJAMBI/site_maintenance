@@ -19,4 +19,7 @@ public class EngineerDetails {
         this.site_name = site_name;
         this.county = county;
     }
+
+    public void delete() {
+    }
 }

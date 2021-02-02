@@ -5,14 +5,21 @@ import java.util.List;
 import java.util.Objects;
 
 public class Engineer {
-    private static int id;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
-   // private int id;
 
 
-    public Engineer(String firstname, String lastname, String email) {
+
+    public Engineer(int id, String firstname, String lastname, String email) {
+        this.id = id;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.email = email;
+    }
+
+    public Engineer( String firstname, String lastname, String email) {
         this.firstName = firstname;
         this.lastName = lastname;
         this.email = email;
@@ -39,7 +46,7 @@ public class Engineer {
         return email;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 

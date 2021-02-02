@@ -1,29 +1,11 @@
 {{#partial "content"}}
 
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-6">-->
-<!--                <h1 class="animated infinite rollIn delay-2s">{{engineer.getFistName}} Sites: </h1>-->
-
-<!--                <ul>-->
-<!--                    {{#each site}}-->
-<!--                    <li><a href="/Engineer/{{engineerId}}/Engineers/{{site.getId}}"> {{site.getSite_name}}</a></li>-->
-<!--                    {{/each}}-->
-<!--                </ul>-->
-
-<!--                <a href="/Engineer/{{engineerId}}/Sites/new">Add a new Site</a>-->
-<!--                <a href="/Engineers">All ENGINEERS</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
 <div class="card mb-3 text-center" style="color: black">
     <div class="row no-gutters">
         <div class="col-md-4" style="background: #DCDCDC; padding:3rem">
             <i class="far fa-user fa-7x"></i>
-            <h2>{{ firstName }}{{ secondName }}</h2>
-            <p><i class="fas fa-envelope-open"></i> Email: {{Email }} </p>
+            <h2>{{ Engineer.firstName }} {{ Engineer.secondName }}</h2>
+            <p><i class="fas fa-envelope-open"></i> Email: {{Engineer.email }} </p>
             <form action="/Engineer/{{id }}/delete" method="post">
                 <button type="submit" class="btn btn-danger">Delete</button>
                 <a href="/Engineer/{{ id}}/edit" class="btn btn-outline-success">Edit</a>
@@ -34,12 +16,12 @@
                 <h2 class="card-title">Sites</h2>
                 <ul class="list-group list-group-flush">
 
-                    {{# if Engineer}}
-                        {{#each Engineer }}
-                            <p><a href="/Engineer/{{id}}/site/{{id}}">{{site_name}}</a> </p>
+                    {{# if Site}}
+                        {{#each Site }}
+                            <p><a href="/Engineer/{{Engineer.id}}/Site/{{id}}">{{site_name}} {{county}} </a> </p>
                         {{/each}}
                     {{else}}
-                        <p>No Engineer added</p>
+                        <p>No Sites added</p>
                     {{/if}}
                 </ul>
             </div>

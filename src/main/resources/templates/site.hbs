@@ -5,7 +5,7 @@
         <div class="col-md-4" style="background: #DCDCDC; padding:3rem">
             <i class="far fa-user fa-7x"></i>
             <h2> Belongs to: {{firstName}}{{secondName}} Engineer.</h2>
-            <h1>{{ site_name }}{{county}}</h1>
+            <h1>{{ site.site_name }}{{site.county}}</h1>
 
             <h2> Edit site</h2>
 
@@ -20,7 +20,7 @@
                 <button type="submit" class="btn btn-danger" id="delete-Site">Delete Site</button>
             </form>
 
-            <a href="/Engineer/{{id}}"> Return to "site"{{site_name}}</a>"
+            <a href="/Engineer/{{id}}"> Return to "site"{{site.site_name}}</a>"
             <form action="/Site/{{id}}/delete" method="post">
                 <button type="submit" class="btn btn-danger">Delete</button>
                 <a href="/Site/{{id}}/edit" class="btn btn-outline-success">Edit</a>
@@ -31,8 +31,8 @@
             <div class="card-body">
                 <h2 class="card-title">Details</h2>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fas fa-envelope-open"></i> Site Name: {{site_name}}</li>
-                    <li class="list-group-item"><i class="fas fa-female"></i> Site County: {{county}}</li>
+                    <li class="list-group-item"><i class="fas fa-envelope-open"></i> Site Name: {{site.site_name}}</li>
+                    <li class="list-group-item"><i class="fas fa-female"></i> Site County: {{site.county}}</li>
                 </ul>
             </div>
         </div>

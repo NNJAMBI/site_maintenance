@@ -101,7 +101,7 @@ public class App {
             String firstName= request.queryParams("firstName");
             String secondName = request.queryParams( "secondName");
             String Email = request.queryParams("Email");
-            Engineer newEngineer = new Engineer(firstName, secondName, Email);
+            Engineer newEngineer = new Engineer( firstName, secondName, Email);
             newEngineer.save();
             return new ModelAndView(model, "engineer-success.hbs");
         }, new HandlebarsTemplateEngine());
@@ -120,8 +120,8 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             String site_name= request.queryParams("site_name");
             String county = request.queryParams("county");
-            Site newSite = new Site(site_name, county, Site.getEngineerId());
-            newSite.save();
+          //  Site newSite = new Site(site_name, county, Site.getEngineerId());
+            //newSite.save();
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -130,8 +130,10 @@ public class App {
 
         get("/Engineer/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            EngineerDetails engineer = Engineer.findDetails(request.params(":id"));
+            int engId = Integer.parseInt(request.params(":id"));
+            Engineer engineer = Engineer.find(engId);
             model.put("Engineer", engineer);
+            model.put("Site", Site.findByEngineer(engId));
             return new ModelAndView(model, "engineer.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -164,9 +166,9 @@ public class App {
             int siteId = Integer.parseInt(request.params("id"));
             String site_name = request.queryParams("site_name");
             model.put("site_name", site_name);
-            Engineer engineer = Engineer.find(Integer.parseInt(Site.getEngineerId()));
-            engineer.delete();
-            Site site = Site.find(Engineer.getId());
+         //   Engineer engineer = Engineer.find(Integer.parseInt(Site.getEngineerId()));
+         //   engineer.delete();
+            Site site = Site.find(siteId);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -174,7 +176,7 @@ public class App {
 //delete engineer all
         post("/Engineer/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            Engineer engineer = Engineer.find(Integer.parseInt(request.params("id")));
+            EngineerDetails engineer = Engineer.findDetails(request.params("id"));
             engineer.delete();
             model.put("engineer", Engineer.all());
             return new ModelAndView(model, "engineer.hbs");
