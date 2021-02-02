@@ -1,61 +1,62 @@
 {{#partial "content"}}
 
 
-    {{#if Site }}
-    <ul>
-        {{#each Site}}
-        <li> <a href="/Sites/Site.getId()">{{Site.geSite_name}}</a> </li>
-        {{/each}}
-    </ul>
-    {{else}}
-    <p>No Sites!</p>
-    {{/if}}
-
-    <a href="/Site/new"> Add New Site </a>
-
-    <form action="/Sites" method="post">
-        <label for="site_name">Site Name</label>
-        <input id="site_name" name="site_name" type="text">
-
-        <button type="submit" class="btn btn-default">Add Site</button>
-    </form> -->
-
-
-<!--    -->
-<!--<div class="card" style="width:400px">-->
-<!--    {{#if Site}}-->
-<!--            <ul>-->
-<!--                {{#each site }}-->
-<!--                <li> <a href="/Sites/{{Site.getId}}">{{Site.getSite_name}}</a> </li>-->
-<!--                {{/each}}-->
-<!--            </ul>-->
-<!--            {{else}}-->
-<!--            <p>No Sites!</p>-->
-<!--        <a href="/Site/new">Add New Site</a>-->
+<!--    {{#if Site }}-->
+<!--    <ul>-->
+<!--        {{#each Site}}-->
+<!--        <li> <a href="/Site/Site.getId()">{{Site.geSite_name}}</a> </li>-->
+<!--        {{/each}}-->
+<!--    </ul>-->
+<!--    {{else}}-->
+<!--    <p>No Sites!</p>-->
 <!--    {{/if}}-->
 
-<!--        </div>-->
+<!--    <a href="/Site/new"> Add New Site </a>-->
 
-<!--<div class="card container site-form">-->
-<!--    <h2> Add Site</h2>-->
-<!--    <form method="post" action="/Site">-->
-<!--        <div class="form-row">-->
-<!--            <div class="form-group col-md-6">-->
-<!--                <label for="site_name">Site Name</label>-->
-<!--                <input type="text" class="form-control" id="site_name"  name="site_name" placeholder="Thika Servers">-->
-<!--            </div>-->
-<!--            <div class="form-group col-md-2">-->
-<!--                <label for="engineerId">Engineer</label>-->
-<!--                <select id="engineerId" name="engineerId" class="form-control">-->
-<!--                    {{#each Engineer}}-->
-<!--                    <option value="$Engineer.getId()">{{Engineer.getFirstName}} {{Engineer.getSecondName}}</option>-->
-<!--                    {{/each}}-->
-<!--                </select>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-success">Save</button>-->
-<!--    </form>-->
-<!--</div>-->
+<!--    <form action="/Sites" method="post">-->
+<!--        <label for="site_name">Site Name</label>-->
+<!--        <input id="site_name" name="site_name" type="text">-->
+
+<!--        <button type="submit" class="btn btn-default">Add Site</button>-->
+<!--    </form> &ndash;&gt;-->
+
+
+
+<div class="card" style="width:400px">
+    {{#if Site}}
+            <ul>
+                {{#each site }}
+                <li> <a href="/Sites/{{id}}">{{site_name}}</a> </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p>No Sites!</p>
+        <a href="/Site/new">Add New Site</a>
+    {{/if}}
+
+        </div>
+
+<div class="card container site-form">
+    <h2> Add Site</h2>
+
+    <form action="/Site" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="site_name">Site Name</label>
+                <input type="text" class="form-control" id="site_name"  name="site_name" required>
+            </div>
+            <div class="form-group col-md-4">
+                <<label for="site_name">Site county</label>
+                <input type="text" class="form-control" id="county"  name="county" required>
+                    {{#each Engineer}}
+                    <option value="{{id}}">{{firstName}} {{secondName}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
 
 {{/partial}}
 {{>layout.hbs}}

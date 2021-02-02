@@ -1,49 +1,51 @@
 {{#partial "content"}}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="animated infinite rollIn delay-2s">{{Engineer.getFistName}} Sites: </h1>
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--                <h1 class="animated infinite rollIn delay-2s">{{engineer.getFistName}} Sites: </h1>-->
 
-                <ul>
-                    {{#each site}}
-                    <li><a href="/Engineer/{{engineerId}}/Engineers/{{site.getId}}"> Site.getSite_name()</a></li>
-                    {{/each}}
-                </ul>
-
-                <a href="/Engineer/{{engineerId}}/Sites/new">Add a new Site</a>
-                <a href="/Engineers">All ENGINEERS</a>
-            </div>
-        </div>
-    </div>
-<!--<div class="card mb-3 text-center" style="color: black">-->
-<!--    <div class="row no-gutters">-->
-<!--        <div class="col-md-4" style="background: #DCDCDC; padding:3rem">-->
-<!--            <i class="far fa-user fa-7x"></i>-->
-<!--            <h2>{{Engineer.getFirstName }}{{ Engineer.getSecondName }}</h2>-->
-<!--            <p><i class="fas fa-envelope-open"></i> Email: {{Engineer.getEmail }} </p>-->
-<!--            <form action="/Engineer/{{Engineer.getId }}/delete" method="post">-->
-<!--                <button type="submit" class="btn btn-danger">Delete</button>-->
-<!--                <a href="/Engineer/{{ Engineer.getId}}/edit" class="btn btn-outline-success">Edit</a>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--        <div class="col-md-8" style="padding:3rem">-->
-<!--            <div class="card-body">-->
-<!--                <h2 class="card-title">Sites</h2>-->
-<!--                <ul class="list-group list-group-flush">-->
-
-<!--                    {{# if Engineer}}-->
-<!--                        {{#each Engineer }}-->
-<!--                            <p><a href="/Engineer/{{engineerId}}/site/{{id}}">{{site_name}}</a> </p>-->
-<!--                        {{/each}}-->
-<!--                    {{else}}-->
-<!--                        <p>No Engineer added</p>-->
-<!--                    {{/if}}-->
+<!--                <ul>-->
+<!--                    {{#each site}}-->
+<!--                    <li><a href="/Engineer/{{engineerId}}/Engineers/{{site.getId}}"> {{site.getSite_name}}</a></li>-->
+<!--                    {{/each}}-->
 <!--                </ul>-->
+
+<!--                <a href="/Engineer/{{engineerId}}/Sites/new">Add a new Site</a>-->
+<!--                <a href="/Engineers">All ENGINEERS</a>-->
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
-<!--</div>-->
+
+
+<div class="card mb-3 text-center" style="color: black">
+    <div class="row no-gutters">
+        <div class="col-md-4" style="background: #DCDCDC; padding:3rem">
+            <i class="far fa-user fa-7x"></i>
+            <h2>{{ firstName }}{{ secondName }}</h2>
+            <p><i class="fas fa-envelope-open"></i> Email: {{Email }} </p>
+            <form action="/Engineer/{{id }}/delete" method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="/Engineer/{{ id}}/edit" class="btn btn-outline-success">Edit</a>
+            </form>
+        </div>
+        <div class="col-md-8" style="padding:3rem">
+            <div class="card-body">
+                <h2 class="card-title">Sites</h2>
+                <ul class="list-group list-group-flush">
+
+                    {{# if Engineer}}
+                        {{#each Engineer }}
+                            <p><a href="/Engineer/{{id}}/site/{{id}}">{{site_name}}</a> </p>
+                        {{/each}}
+                    {{else}}
+                        <p>No Engineer added</p>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{/partial}}
 

@@ -7,13 +7,13 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <h2> All Lists: </h2>
+            <h2> All Engineers: </h2>
 
             {{#if Engineer}}
             <p>Click on a engineer to see his/her sites:</p>
             <ul>
                 {{#each Engineer }}
-                <li><a href="/Engineer/{{ engineerId}}">{{Engineer.getFirstName}}</a></li>
+                <li><a href="/Engineer/{{id}}">{{firstName}}{{secondName}} </a></li>
                 {{/each}}
             </ul>
             {{else}}
@@ -25,16 +25,16 @@
             <h2>New Engineer:</h2>
 
             <form action="/Engineer" method="post">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" name="firstName" id="firstName" required>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="secondName">Second Name</label>
                     <input type="text" class="form-control" name="secondName" id="secondName" required>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="Email">Email</label>
                     <input type="text" class="form-control" name="Email" id="Email" required>
                 </div>
@@ -44,18 +44,30 @@
         </div>
 
         <div class="col-md-4">
+        <h1>List of all Sites</h1>
+
+        {{# if Site}}
+            {{#each Site }}
+                <p><a href="/Engineer/{{id}}/site/{{id}}">{{site_name}}{{county}}</a> </p>
+            {{/each}}
+        {{else}}
+            <p>No Site added</p>
+        {{/if}}
+        </div>
+
+        <div class="col-md-4">
             <h2>New Site:</h2>
 
             <form action="/Site" method="post">
-                <label for="engineerId">Select a List</label>
-                <select id='engineerId' name='engineerId' type='text'>
+<!--                <label for="engineer">Select an Engineer</label>-->
                     {{#each Engineer}}
-                    <option value="{{engineerId}}">{{Engineer.getFirstName}}</option>
+                    <option value="{{id}}">{{firstName}}{{secondName}}</option>
                     {{/each}}
-                </select>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="site_name">Site Name</label>
                     <input type="text" class="form-control" id="site_name"  name="site_name">
+                    <label for="site_name">Site County</label>
+                    <input type="text" class="form-control" id="county"  name="county">
                 </div>
 
                 <button type="submit" class="btn btn-success">Add Site</button>
@@ -64,15 +76,6 @@
     </div>
 
 
-<!--    <h1>List of all Sites</h1>-->
-
-<!--    {{# if site}}-->
-<!--        {{#each site }}-->
-<!--            <p><a href="/Engineer/{{engineerId}}/site/{{id}}">{{site_name}}</a> </p>-->
-<!--        {{/each}}-->
-<!--    {{else}}-->
-<!--        <p>No Site added</p>-->
-<!--    {{/if}}-->
 
 {{/partial}}
 

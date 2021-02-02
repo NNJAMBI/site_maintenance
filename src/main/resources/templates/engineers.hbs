@@ -5,7 +5,7 @@
     <table class="table table-dark">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">ID</th>
+
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
@@ -14,12 +14,12 @@
         <tbody>
         {{#each Engineer}}
         <tr>
-            <th scope="row">$Engineer.getId()</th>
-            <td>{{Engineer.getFirstName}}</td>
-            <td>{{Engineer.getSecondName}}</td>
-            <td>{{Engineer.getEmail}}</td>
+
+            <td>{{firstName}}</td>
+            <td>{{secondName}}</td>
+            <td>{{email}}</td>
             <td>
-                <a  class="btn btn-primary btn-sm" href="Engineer/{{engineerId}}">View</a>
+                <a  class="btn btn-primary btn-sm" href="Engineer/{{id}}">View</a>
             </td>
         </tr>
         {{/each}}
@@ -27,8 +27,8 @@
     </table>
 <!--    <a class="btn btn-outline-light nav-item" href="/Engineer/new"> NEW ENGINEERS </a>-->
 
-    <a href="/Engineers/Engineer.getId()/Sites/new">Add a new Site</a>
-    <a href="/Engineers">All Engineers</a>
+    <a href="/Engineer/{{id}}/site/new">Add a new Site</a>
+    <a href="/Engineer">All Engineers</a>
 </div>
 
 {{/partial}}

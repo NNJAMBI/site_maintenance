@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class Engineer {
+    private static int id;
     private String firstName;
     private String lastName;
     private String email;
-    private int id;
+   // private int id;
+
 
     public Engineer(String firstname, String lastname, String email) {
         this.firstName = firstname;
@@ -16,9 +18,10 @@ public class Engineer {
         this.email = email;
     }
 
+
     public  List<Site> getSites() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "SELECT * FROM sites where engineerId=:id";
+            String sql = "SELECT * FROM sites where id=:id";
             return con.createQuery(sql)
                     .addParameter("id", this.id)
                     .executeAndFetch(Site.class);
@@ -36,7 +39,7 @@ public class Engineer {
         return email;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
@@ -73,6 +76,19 @@ public class Engineer {
     }
 
 
+    public static EngineerDetails findDetails(String id) {
+        try (Connection con = DB.sql2o.open()) {
+            // String sql = "SELECT * FROM engineer where id=:id";
+            String sql = "SELECT firstname, lastname, email, sites.site_name, sites.county FROM engineer" +
+                          " INNER JOIN sites ON engineer.id = sites.engineerId WHERE engineer.id = :id";
+            EngineerDetails engineer = con.createQuery(sql)
+                    .addParameter("id", Integer.parseInt(id))
+                    .executeAndFetchFirst(EngineerDetails.class);
+            return engineer;
+        }
+    }
+
+
     @Override
     public boolean equals(Object otherEngineer) {
         if (!(otherEngineer instanceof Engineer)) {
@@ -103,5 +119,7 @@ public class Engineer {
                     .addParameter("id", id)
                     .executeUpdate();
         }
+
+        }
     }
-}
+

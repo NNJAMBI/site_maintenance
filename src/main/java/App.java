@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-//get an engineer
+//get all engineers
         get("/Engineer", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Engineer> allEngineers = Engineer.all();
@@ -43,29 +44,36 @@ public class App {
             return new ModelAndView(model, "engineers.hbs");
         }, new HandlebarsTemplateEngine());
 
+      //get an engineer
+
+//        get("/Engineer/:id", (req, res) -> {
+//        Map<String, Object> model = new HashMap<>();
+//            int idOfEngineer = Integer.parseInt(req.params("id"));
+//            Engineer foundEngineer = Engineer.find(idOfEngineer);
+//            model.put("engineer", foundEngineer);
+//            //List<Engineer> allEngineers = Engineer.all();
+//           // model.put("Engineer", allEngineers);
+//            return new ModelAndView(model, "engineer.hbs");
+//        }, new HandlebarsTemplateEngine());
+
+
 //adding a new site to an engineer
 
-        get("Engineer/:id/Sites/new", (request, response) -> {
+        get("Engineer/:id/site/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            List<Engineer> allEngineers = Engineer.all();
-            model.put("engineer", allEngineers);
             Engineer engineer = Engineer.find(Integer.parseInt(request.params(":id")));
-            model.put("engineerId", engineer);
-            List<Site> allSites = Site.all();
-            model.put("sites", allSites);
+            model.put("engineer", engineer);
             return new ModelAndView(model, "engineer-site-form.hbs");
         }, new HandlebarsTemplateEngine());
 
        // linking the site ID to the engineer ID
 
-        get("/Engineers/:engineerId/Sites/:id ", (request, response) -> {
+        get("/Engineer/:id/site/:id", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            List<Engineer> allEngineers = Engineer.all();
-            model.put("engineer", allEngineers);
-            Engineer engineer= Engineer.find(Integer.parseInt(request.params(":engineerId")));
-            model.put("engineerId", engineer);
+            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":id")));
             Site site = Site.find(Integer.parseInt(request.params(":id")));
-            model.put("site", site );
+            model.put("engineer", engineer);
+            model.put("site", site);
             return new ModelAndView(model, "sites.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -73,11 +81,9 @@ public class App {
 
         get("/Sites/:id", (request, response) -> {
             HashMap<String, Object> model = new HashMap<String, Object>();
-            List<Site> allSites = Site.all();
-            model.put("Site", allSites);
             Site site = Site.find(Integer.parseInt(request.params(":id")));
-            model.put("Site", site);
-            return new ModelAndView(model, "Site.hbs");
+            model.put("site", site);
+            return new ModelAndView(model, "site.hbs");
         }, new HandlebarsTemplateEngine());
 
 
@@ -86,34 +92,95 @@ public class App {
         get("/Engineer/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             List<Engineer> allEngineers = Engineer.all();
-            model.put("engineer", allEngineers);
+            model.put("Engineer", allEngineers);
             return new ModelAndView(model, "engineer-form.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/Engineer", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            String firstname= request.queryParams("firstname");
-            String lastname = request.queryParams( "lastname");
-            String email = request.queryParams("email");
-            Engineer newEngineer = new Engineer(firstname, lastname, email);
+            String firstName= request.queryParams("firstName");
+            String secondName = request.queryParams( "secondName");
+            String Email = request.queryParams("Email");
+            Engineer newEngineer = new Engineer(firstName, secondName, Email);
             newEngineer.save();
             return new ModelAndView(model, "engineer-success.hbs");
         }, new HandlebarsTemplateEngine());
 
 
-        //retrieving the engineer Id
+        //adding a new site
 
-        get("/Engineers/:id", (request, response) -> {
+        get("/Site/new", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            List<Engineer> allEngineers = Engineer.all();
-            model.put("engineer", allEngineers);
-            Engineer engineer = Engineer.find(Integer.parseInt(request.params(":id")));
             List<Site> allSites = Site.all();
             model.put("Site", allSites);
-            return new ModelAndView(model, "stylist.hbs");
+            return new ModelAndView(model, "site-form.hbs");
         }, new HandlebarsTemplateEngine());
 
+        post("/Site", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            String site_name= request.queryParams("site_name");
+            String county = request.queryParams("county");
+            Site newSite = new Site(site_name, county, Site.getEngineerId());
+            newSite.save();
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        //retrieving the engineer Id
+
+        get("/Engineer/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            EngineerDetails engineer = Engineer.findDetails(request.params(":id"));
+            model.put("Engineer", engineer);
+            return new ModelAndView(model, "engineer.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        //get a site
+        get("/site", (req, res) -> {
+            Map<String, Object> model = new HashMap<String , Object>();
+            List<Site> allSites = Site.all();
+            model.put("Site", allSites);
+            return new ModelAndView(model, "sites.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //updating site details
+        post("/sites/:engineerId/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            int engineerId = Integer.parseInt(request.params("engineerId"));
+            model.put("engineer", engineerId);
+            String site_name = request.queryParams("site_name");
+            String county = request.queryParams("county");
+            Site site = Site.find(engineerId);
+            site.update(site_name, county);
+            request.session().attribute("site_name");
+            return new ModelAndView(model, "success.hbs");
+        });
+
+
+        //delete
+        post("Engineer/:id/sites/:id/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            int siteId = Integer.parseInt(request.params("id"));
+            String site_name = request.queryParams("site_name");
+            model.put("site_name", site_name);
+            Engineer engineer = Engineer.find(Integer.parseInt(Site.getEngineerId()));
+            engineer.delete();
+            Site site = Site.find(Engineer.getId());
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+//delete engineer all
+        post("/Engineer/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Engineer engineer = Engineer.find(Integer.parseInt(request.params("id")));
+            engineer.delete();
+            model.put("engineer", Engineer.all());
+            return new ModelAndView(model, "engineer.hbs");
+        }, new HandlebarsTemplateEngine());
     }
+
 
 }
 
